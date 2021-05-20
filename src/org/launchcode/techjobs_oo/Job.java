@@ -27,7 +27,7 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
-    // Custom methods for equals() and hashCode()
+    // Custom methods for equals(), hashCode(), and toString()
 
     @Override
     public boolean equals(Object o) {
@@ -40,6 +40,25 @@ public class Job {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        if (name == null && employer == null && location == null
+            && positionType == null && coreCompetency == null) {
+            return "%nOOPS! This job does not seem to exist.%n";
+        }
+
+        String jobListing = "%n";
+        jobListing += "ID: " + id + "%n";
+        jobListing += "Name: " + (name.isEmpty() ? "Data not available" : name) + "%n";
+        jobListing += "Employer: " + (employer.getValue() == null ? "Data not available" : employer.getValue()) + "%n";
+        jobListing += "Location: " + (location.getValue() == null ? "Data not available" : location.getValue()) + "%n";
+        jobListing += "Position Type: " + (positionType.getValue() == null ? "Data not available" : positionType.getValue()) + "%n";
+        jobListing += "Core Competency: " + (coreCompetency.getValue() == null ? "Data not available" : coreCompetency.getValue()) + "%n";
+        jobListing += "%n";
+
+        return jobListing;
     }
 
     // Getters and setters for every field except nextID and id

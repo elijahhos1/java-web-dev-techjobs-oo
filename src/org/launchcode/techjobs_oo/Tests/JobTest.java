@@ -43,4 +43,35 @@ public class JobTest {
 
         assertFalse(jobOne.equals(jobTwo));
     }
+
+    @Test
+    public void testJobForProperToStringMethodOutput() {
+        Job job = new Job("Product tester", new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        // Testing if there are new lines before and after the output of toString().
+        assertEquals("%n", job.toString().substring(0, 2));
+        assertEquals("%n", job.toString().substring(job.toString().length() - 2));
+
+        // Testing if the output of toString() matches the expected string literal.
+        assertEquals("%nID: 1%nName: Product tester%nEmployer: ACME%nLocation: Desert%n" +
+                "Position Type: Quality control%nCore Competency: Persistence%n%n", job.toString());
+
+
+        Job newJob = new Job("", new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
+
+        // Testing if a field left out in the Job object declaration adds
+        // "Data not available" to the output of toString().
+        assertTrue(newJob.toString().contains("Data not available"));
+
+
+        Job newNewJob = new Job();
+
+        // Testing if a job without initialized fields (except for id) matches
+        // "OOPS! This job does not seem to exist." when toString() is called.
+        assertTrue(newNewJob.toString().contains("OOPS! This job does not seem to exist."));
+    }
 }
