@@ -51,17 +51,17 @@ public class Job {
 
         String jobListing = "%n";
         jobListing += "ID: " + id + "%n";
-        jobListing += "Name: " + (name.isEmpty() ? "Data not available" : name) + "%n";
-        jobListing += "Employer: " + (employer.getValue() == null ? "Data not available" : employer.getValue()) + "%n";
-        jobListing += "Location: " + (location.getValue() == null ? "Data not available" : location.getValue()) + "%n";
-        jobListing += "Position Type: " + (positionType.getValue() == null ? "Data not available" : positionType.getValue()) + "%n";
-        jobListing += "Core Competency: " + (coreCompetency.getValue() == null ? "Data not available" : coreCompetency.getValue()) + "%n";
+        jobListing += "Name: " + (name == null || name.isEmpty() ? "Data not available" : name) + "%n";
+        jobListing += "Employer: " + (employer.getValue() == null || employer.getValue().isEmpty() ? "Data not available" : employer.getValue()) + "%n";
+        jobListing += "Location: " + (location.getValue() == null || location.getValue().isEmpty() ? "Data not available" : location.getValue()) + "%n";
+        jobListing += "Position Type: " + (positionType.getValue() == null || positionType.getValue().isEmpty() ? "Data not available" : positionType.getValue()) + "%n";
+        jobListing += "Core Competency: " + (coreCompetency.getValue() == null || coreCompetency.getValue().isEmpty() ? "Data not available" : coreCompetency.getValue()) + "%n";
         jobListing += "%n";
 
         return jobListing;
     }
 
-    // Getters and setters for every field except nextID and id
+    // Getters and setters for every field except nextID and a getter for id
 
     public int getId() {
         return id;
