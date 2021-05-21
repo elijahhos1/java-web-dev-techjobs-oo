@@ -19,5 +19,4 @@ public class Main {
             System.out.printf(job.toString());
         }
     }
-
 }

@@ -1,6 +1,5 @@
 package org.launchcode.techjobs_oo.Tests;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.launchcode.techjobs_oo.*;
 
@@ -14,6 +13,8 @@ public class JobTest {
         Job jobTwo = new Job();
 
         assertFalse(jobOne.getId() == jobTwo.getId());
+
+        assertTrue((jobTwo.getId() - jobOne.getId()) == 1);
     }
 
     @Test
@@ -53,25 +54,31 @@ public class JobTest {
         // Testing if there are new lines before and after the output of toString().
         assertEquals("%n", job.toString().substring(0, 2));
         assertEquals("%n", job.toString().substring(job.toString().length() - 2));
+    }
 
-        // Testing if the output of toString() matches the expected string literal.
-        assertEquals("%nID: 1%nName: Product tester%nEmployer: ACME%nLocation: Desert%n" +
-                "Position Type: Quality control%nCore Competency: Persistence%n%n", job.toString());
+    @Test
+    public void testIfJobToStringMethodReturnsJobDoesNotExistWithEmptyConstructor() {
+        Job job = new Job();
 
+        assertTrue(job.toString().contains("OOPS! This job does not seem to exist."));
+    }
 
-        Job newJob = new Job("", new Employer("ACME"),
+    @Test
+    public void testIfJobToStringMethodAddsDataNotAvailableToField() {
+        Job job = new Job("", new Employer("ACME"),
                 new Location("Desert"), new PositionType("Quality control"),
                 new CoreCompetency("Persistence"));
 
-        // Testing if a field left out in the Job object declaration adds
-        // "Data not available" to the output of toString().
-        assertTrue(newJob.toString().contains("Data not available"));
+        assertTrue(job.toString().contains("Data not available"));
+    }
 
+    @Test
+    public void testJobToStringMethodForEqualityToExpectedString() {
+        Job job = new Job("Product tester", new Employer("ACME"),
+                new Location("Desert"), new PositionType("Quality control"),
+                new CoreCompetency("Persistence"));
 
-        Job newNewJob = new Job();
-
-        // Testing if a job without initialized fields (except for id) matches
-        // "OOPS! This job does not seem to exist." when toString() is called.
-        assertTrue(newNewJob.toString().contains("OOPS! This job does not seem to exist."));
+        assertEquals("%nID: 9%nName: Product tester%nEmployer: ACME%nLocation: Desert%n" +
+                "Position Type: Quality control%nCore Competency: Persistence%n%n", job.toString());
     }
 }
