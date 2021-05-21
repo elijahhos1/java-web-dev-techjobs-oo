@@ -42,6 +42,10 @@ public class Job {
         return Objects.hash(id);
     }
 
+    /* For the toString() method I decided to use %n for creating new lines
+    * and consequently had to use printf in the main function. The reason for this
+    * is that newline characters in Java are platform-dependent and could be either
+    * \r\n, \r, or \n. Yes, I know it's ugly, but it should work across multiple OSs. */
     @Override
     public String toString() {
         if (name == null && employer == null && location == null
@@ -52,10 +56,10 @@ public class Job {
         String jobListing = "%n";
         jobListing += "ID: " + id + "%n";
         jobListing += "Name: " + (name == null || name.isEmpty() ? "Data not available" : name) + "%n";
-        jobListing += "Employer: " + (employer.getValue() == null || employer.getValue().isEmpty() ? "Data not available" : employer.getValue()) + "%n";
-        jobListing += "Location: " + (location.getValue() == null || location.getValue().isEmpty() ? "Data not available" : location.getValue()) + "%n";
-        jobListing += "Position Type: " + (positionType.getValue() == null || positionType.getValue().isEmpty() ? "Data not available" : positionType.getValue()) + "%n";
-        jobListing += "Core Competency: " + (coreCompetency.getValue() == null || coreCompetency.getValue().isEmpty() ? "Data not available" : coreCompetency.getValue()) + "%n";
+        jobListing += "Employer: " + (employer == null || employer.getValue().isEmpty() ? "Data not available" : employer.getValue()) + "%n";
+        jobListing += "Location: " + (location == null || location.getValue().isEmpty() ? "Data not available" : location.getValue()) + "%n";
+        jobListing += "Position Type: " + (positionType == null || positionType.getValue().isEmpty() ? "Data not available" : positionType.getValue()) + "%n";
+        jobListing += "Core Competency: " + (coreCompetency == null || coreCompetency.getValue().isEmpty() ? "Data not available" : coreCompetency.getValue()) + "%n";
         jobListing += "%n";
 
         return jobListing;

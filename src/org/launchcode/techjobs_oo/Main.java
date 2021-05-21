@@ -14,6 +14,8 @@ public class Main {
         jobs.add(job3);
 
         for (Job job : jobs){
+            // See my comment above toString() in the Job class
+            // for an explanation as to why I used printf() here.
             System.out.printf(job.toString());
         }
     }
